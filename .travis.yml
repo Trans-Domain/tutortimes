@@ -1,0 +1,33 @@
+language: node_js
+
+node_js: "stable"
+
+cache:
+  directories: 
+  - node_modules
+  - client/node_modules
+
+before_install: cd client
+
+script:
+  - yarn test
+  - CI=false
+  - yarn build
+
+#safelist
+branches: 
+  only:
+  - master
+
+# blocklist
+branches:
+  except:
+  - dashboard
+  - google-login
+  - dummy-backend
+  - classes-tab
+  - notes-tab
+  - modularize-actions
+  - db-connection
+  - rest-api
+
