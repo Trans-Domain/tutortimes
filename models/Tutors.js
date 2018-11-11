@@ -36,6 +36,6 @@ const TutorSchema = new Schema({
   ]
 });
 
-const Tutor = mongoose.model("Tutor", TutorSchema);
+const Tutors = mongoose.model("Tutor", TutorSchema);
 
-module.exports = Tutor;
+module.exports = Tutors;

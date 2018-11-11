@@ -64,6 +64,6 @@ const StudentSchema = new Schema({
   score: Number
 });
 
-const Student = mongoose.model("Student", StudentSchema);
+const Students = mongoose.model("Student", StudentSchema);
 
-module.exports = Student;
+module.exports = Students;
