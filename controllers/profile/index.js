@@ -6,12 +6,10 @@ Controllers include:
     - delete account - DELETE
 */
 
-const allUsers = require("./allUsers");
-const findUser = require("./findUser");
+// const allUsers = require("./allUsers");
+// const findUser = require("./findUser");
 const createUser = require("./createUser");
 
 module.exports = {
-    all: allUsers,
-    findUser,
-    createUser
+  createUser
 };

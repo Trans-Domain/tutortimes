@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-// const routes = require("./routes");
+const routes = require("./routes");
 const path = require("path");
 const PORT = process.env.PORT || 3001;
 const mongoose = require("mongoose");
@@ -24,7 +24,7 @@ mongoose.connect(
 );
 
 // add routes
-// app.use("/", routes);
+app.use("/", routes);
 
 // listen on PORT
 app.listen(PORT, function() {

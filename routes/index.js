@@ -1,17 +1,15 @@
-// const router = require("express").Router();
+const router = require("express").Router();
 
-// // const profile = require("../controllers/profile");
+const profile = require("../controllers/profile");
 // // const quiz = require("../controllers/quizes");
 
-// /*
-//  * routes with 'temp-done' status, need data from the front-end to be complete.
-//  */
-
-// module.exports = router
-//   // profile routes
+module.exports = router
+  // profile routes
+  // Create
+  .post("/create-student", profile.createUser.student);
 //   .get("/all-users", profile.all)
 //   .get("/user-check", profile.findUser)
-//   .post("/create-user", profile.createUser)
+
 //   // quiz routes
 //   .post("/create-question", quiz.createQuestion)
 //   .get("/all-quizzes", quiz.findAllQuizzes)

@@ -3,6 +3,9 @@
 # dependencies
 /node_modules
 
+# seeds 
+/seeds
+
 # env
 .env
 
