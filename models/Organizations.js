@@ -6,6 +6,7 @@ const OrganizationSchema = new Schema({
   address: { type: String, required: true },
   dateJoined: { type: Date, required: true },
   billingDate: { type: Date },
+  logo: { type: Buffer },
   tutors: [
     {
       tutorId: { type: ObjectId, ref: "Tutor" }

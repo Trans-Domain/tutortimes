@@ -12,6 +12,7 @@ const QuizSchema = new Schema({
       option2: { type: String, required: true, isCorrect: Boolean },
       option3: { type: String, required: true, isCorrect: Boolean },
       option4: { type: String, required: true, isCorrect: Boolean },
+      image: { type: Mixed },
       score: { type: Number, required: true }
     }
   ]
