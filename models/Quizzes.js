@@ -5,6 +5,7 @@ const QuizSchema = new Schema({
   title: { type: String, required: true },
   score: { type: Number, required: true },
   difficulty: { type: Number, required: true },
+  cover: { type: Mixed },
   questions: [
     {
       question: { type: String, required: true },
