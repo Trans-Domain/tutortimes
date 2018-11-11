@@ -14,18 +14,25 @@ const StudentSchema = new Schema({
     type: String,
     required: true
   },
+  photo: {
+    type: Buffer
+  },
   type: {
     type: String,
     required: true
   },
   tutors: [
     {
-      name: String
+      name: String,
+      photo: Buffer,
+      tutorId: String
     }
   ],
   parents: [
     {
-      name: String
+      name: String,
+      photo: Buffer,
+      parentId: String
     }
   ],
   quizes: [
