@@ -1,12 +1,12 @@
 const router = require("express").Router();
 
-const profile = require("../controllers/profile");
+const user = require("../controllers/user");
 // // const quiz = require("../controllers/quizes");
 
 module.exports = router
-  // profile routes
+  // user routes
   // Create
-  .post("/create-student", profile.createUser.student);
+  .post("/create-student", user.create.student);
 //   .get("/all-users", profile.all)
 //   .get("/user-check", profile.findUser)
 
