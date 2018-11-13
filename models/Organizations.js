@@ -17,33 +17,33 @@ const OrganizationSchema = new Schema({
       photo: Buffer,
       online: Boolean,
       bio: String,
+      phone: String
+    }
+  ],
+  students: [
+    {
+      id: String,
+      fullname: String,
+      password: String,
+      email: String,
+      photo: Buffer,
+      online: Boolean,
+      bio: String,
+      goal: String,
       phone: String,
-      students: [
+      grade: { type: Number, required: true },
+      score: Number,
+      reviews: [
         {
-          id: String,
-          fullname: String,
-          password: String,
-          email: String,
-          photo: Buffer,
-          online: Boolean,
-          bio: String,
-          goal: String,
-          phone: String,
-          grade: { type: Number, required: true },
-          score: Number,
-          reviews: [
-            {
-              date: Date,
-              body: String
-            }
-          ],
-          parent: {
-            id: String,
-            name: String,
-            email: String
-          }
+          date: Date,
+          body: String
         }
-      ]
+      ],
+      parent: {
+        id: String,
+        name: String,
+        email: String
+      }
     }
   ],
   quizzes: [
