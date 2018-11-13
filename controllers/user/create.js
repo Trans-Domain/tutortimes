@@ -1,8 +1,8 @@
-const Student = require("../../models/Students");
+const Organization = require("../../models/Organizations");
 
 module.exports = {
-  student: function(req, res) {
-    Student.insertMany(req.body)
+  organization: function(req, res) {
+    Organization.insertMany(req.body)
       .then(result => {
         res.json(result);
       })

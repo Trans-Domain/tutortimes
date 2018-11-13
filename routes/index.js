@@ -6,7 +6,7 @@ const user = require("../controllers/user");
 module.exports = router
   // user routes
   // Create
-  .post("/create-student", user.create.student);
+  .post("/create-organization", user.create.organization);
 //   .get("/all-users", profile.all)
 //   .get("/user-check", profile.findUser)
 
