@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const students = require("./Students");
 
 const OrganizationSchema = new Schema({
   name: { type: String, required: true },
@@ -40,10 +39,13 @@ const OrganizationSchema = new Schema({
           tutor: String
         }
       ],
-      parent: {
-        fullname: String,
-        email: String
-      }
+      parent: [
+        {
+          fullname: String,
+          email: String,
+          password: String
+        }
+      ]
     }
   ],
   quizzes: [
