@@ -37,6 +37,5 @@ module.exports = {
       .catch(function(err) {
         throw err;
       });
-  },
-  quiz: function(req, res) {}
+  }
 };
