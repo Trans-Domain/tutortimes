@@ -9,5 +9,15 @@ module.exports = {
       .catch(function(err) {
         throw err;
       });
+  },
+  find: function(req, res) {
+    console.log("entered route");
+    Organization.findOne({ name: req.params.name })
+      .then(result => {
+        res.json(result);
+      })
+      .catch(err => {
+        throw err;
+      });
   }
 };
