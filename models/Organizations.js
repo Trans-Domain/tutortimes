@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const students = require("./Students");
 
 const OrganizationSchema = new Schema({
   name: { type: String, required: true },
@@ -22,7 +23,6 @@ const OrganizationSchema = new Schema({
   ],
   students: [
     {
-      id: String,
       fullname: String,
       password: String,
       email: String,
@@ -31,17 +31,17 @@ const OrganizationSchema = new Schema({
       bio: String,
       goal: String,
       phone: String,
-      grade: { type: Number, required: true },
+      grade: String,
       score: Number,
       reviews: [
         {
           date: Date,
-          body: String
+          body: String,
+          tutor: String
         }
       ],
       parent: {
-        id: String,
-        name: String,
+        fullname: String,
         email: String
       }
     }

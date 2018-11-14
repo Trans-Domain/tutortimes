@@ -7,7 +7,8 @@ module.exports = router
   // user routes
   // Create
   .post("/create-organization", user.create.organization)
-  .post("/create-tutor", user.create.tutor);
+  .post("/create-tutor", user.create.tutor)
+  .post("/create-student", user.create.student);
 //   .get("/all-users", profile.all)
 //   .get("/user-check", profile.findUser)
 
