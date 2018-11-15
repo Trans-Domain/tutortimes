@@ -14,5 +14,11 @@ module.exports = {
       .catch(function(err) {
         throw err;
       });
+  },
+  findAll: function(req, res) {
+    let name = req.params.organization;
+    Organization.findOne({ name: name })
+      .then(result => res.json(result.students))
+      .catch(err => res.json(err));
   }
 };

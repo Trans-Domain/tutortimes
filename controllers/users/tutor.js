@@ -20,5 +20,10 @@ module.exports = {
     Organization.findOne({ name: name })
       .then(result => res.json(result.tutors))
       .catch(err => res.json(err));
+  },
+  findOne: function(req, res) {
+    Organization.find({ "tutors.email": req.params.email })
+      .then(result => res.json(result))
+      .catch(err => res.json(err));
   }
 };
