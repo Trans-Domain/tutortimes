@@ -26,5 +26,12 @@ module.exports = {
       .catch(err => {
         throw err;
       });
+  },
+  update: function(req, res) {
+    let name = req.body.name;
+    let changes = req.body.changes;
+    Organization.updateOne({ name }, changes)
+      .then(result => res.json(result))
+      .catch(err => res.json(err));
   }
 };
