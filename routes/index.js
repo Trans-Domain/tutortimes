@@ -11,8 +11,9 @@ module.exports = router
   // For Organization
   .post("/create-tutor", user.tutor.create)
   .get("/find-all-tutors/:organization", user.tutor.findAll)
-  .get("/find-one-tutor/:name", user.tutor.findOne)
+  .get("/find-one-tutor/:email", user.tutor.findOne)
 
   // For Tutors
   .get("/find-all-students/:organization", user.student.findAll)
+  .get("/find-one-student/:email", user.student.findOne)
   .post("/create-student", user.student.create);

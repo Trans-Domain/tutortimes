@@ -23,7 +23,16 @@ module.exports = {
   },
   findOne: function(req, res) {
     Organization.find({ "tutors.email": req.params.email })
-      .then(result => res.json(result))
+      .then(result => {
+        let tutor;
+        for (let i = 0; i < result[0].tutors.length; i++) {
+          if (result[0].tutors[i].email === req.params.email) {
+            tutor = result[0].tutors[i];
+            res.json(tutor);
+            break;
+          }
+        }
+      })
       .catch(err => res.json(err));
   }
 };
