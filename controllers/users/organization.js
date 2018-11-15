@@ -38,5 +38,11 @@ module.exports = {
     Organization.find({})
       .then(result => res.json(result))
       .catch(err => res.json(err));
+  },
+  delete: function(req, res) {
+    let name = req.body.name;
+    Organization.deleteOne({ name })
+      .then(result => res.json(result))
+      .catch(err => res.json(err));
   }
 };

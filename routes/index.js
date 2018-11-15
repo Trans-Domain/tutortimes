@@ -7,5 +7,6 @@ module.exports = router
   .get("/find-organization/:name", user.organization.find)
   .get("/find-all-organizations", user.organization.findAll)
   .put("/update-organization", user.organization.update)
+  .delete("/delete-organization", user.organization.delete)
   .post("/create-tutor", user.tutor.create)
   .post("/create-student", user.student.create);
