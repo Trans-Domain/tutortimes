@@ -33,5 +33,10 @@ module.exports = {
     Organization.updateOne({ name }, changes)
       .then(result => res.json(result))
       .catch(err => res.json(err));
+  },
+  findAll: function(req, res) {
+    Organization.find({})
+      .then(result => res.json(result))
+      .catch(err => res.json(err));
   }
 };
