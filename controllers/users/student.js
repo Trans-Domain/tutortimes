@@ -1,4 +1,5 @@
 import Organization from "../../models/Organizations";
+import getInfoUpdates from "../../helpers/getInfoUpdates/getInfoUpdates";
 
 export default {
   create: (req, res) => {
@@ -35,5 +36,9 @@ export default {
         }
       })
       .catch(err => res.json(err));
+  },
+  update: (req, res) => {
+    // let id = req.body.id;
+    // let updates =
   }
 };
