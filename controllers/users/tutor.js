@@ -1,4 +1,5 @@
 import Organization from "../../models/Organizations";
+import getInfoUpdates from "../../helpers/getInfoUpdates/getInfoUpdates";
 
 export default {
   create: (req, res) => {
@@ -37,14 +38,12 @@ export default {
   },
   update: (req, res) => {
     let id = req.body.id;
-    let updates = req.body.update; // get the body of changes, update only those in the tutor section and create an object that is returned in the format we want.
+    let updates = getInfoUpdates(req.body.updates, req.body.type);
+
     Organization.update(
       { "tutors._id": id },
       {
-        $set: {
-          // need to figure out how to make this more flexible
-          "tutors.$.bio": "Teaching is fun.... sometimes"
-        }
+        $set: updates
       }
     )
       .then(result => res.json(result))

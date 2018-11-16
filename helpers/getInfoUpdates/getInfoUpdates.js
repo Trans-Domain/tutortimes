@@ -3,10 +3,10 @@
   - bio
   - phone
 */
-const getTutorInfoUpdates = tutorObj => {
+const getInfoUpdates = (user, type) => {
   // get array of keys and values
-  let keys = Object.keys(tutorObj).map(x => `tutors.$.${x}`);
-  let values = Object.values(tutorObj);
+  let keys = Object.keys(user).map(x => `${type}.$.${x}`);
+  let values = Object.values(user);
   // loop through elements and create new object
   let resultObj = {};
   for (let i = 0; i < keys.length; i++) {
@@ -16,4 +16,4 @@ const getTutorInfoUpdates = tutorObj => {
   return resultObj;
 };
 
-export default getTutorInfoUpdates;
+export default getInfoUpdates;
