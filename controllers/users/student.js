@@ -38,7 +38,11 @@ export default {
       .catch(err => res.json(err));
   },
   update: (req, res) => {
-    // let id = req.body.id;
-    // let updates =
+    let id = req.body.id;
+    let updates = getInfoUpdates(req.body.updates, req.body.type);
+
+    Organization.update({ "students._id": id }, { $set: updates })
+      .then(result => res.json(result))
+      .catch(err => res.json(err));
   }
 };

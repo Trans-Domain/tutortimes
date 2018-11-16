@@ -40,12 +40,7 @@ export default {
     let id = req.body.id;
     let updates = getInfoUpdates(req.body.updates, req.body.type);
 
-    Organization.update(
-      { "tutors._id": id },
-      {
-        $set: updates
-      }
-    )
+    Organization.update({ "tutors._id": id }, { $set: updates })
       .then(result => res.json(result))
       .catch(err => res.json(err));
   }

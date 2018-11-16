@@ -12,9 +12,10 @@ export default router
   .post("/create-tutor", user.tutor.create)
   .get("/find-all-tutors/:organization", user.tutor.findAll)
   .get("/find-one-tutor/:email", user.tutor.findOne)
+  .put("/update-tutor-info", user.tutor.update)
 
   // For Tutors
-  .put("/update-tutor-info", user.tutor.update)
+  .post("/create-student", user.student.create)
   .get("/find-all-students/:organization", user.student.findAll)
   .get("/find-one-student/:email", user.student.findOne)
-  .post("/create-student", user.student.create);
+  .put("/update-student-info", user.student.update);
