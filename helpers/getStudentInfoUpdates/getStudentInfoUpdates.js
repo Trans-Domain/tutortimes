@@ -1,0 +1,6 @@
+/*
+  - password
+  - bio
+  - phone
+  - goal
+*/

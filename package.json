@@ -6,11 +6,7 @@
   "author": "<ashishuiux@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "server": "node server.js",
-    "client": "cd client && npm run start",
-    "start": "node server.js",
-    "build": "cd client && yarn install && yarn run build",
-    "deploy": "yarn build && git add . && git commit -m \"Building for production\" && git push heroku master",
+    "server": "nodemon --exec babel-node server.js",
     "test": "nyc mocha",
     "format": "prettier --write \"**/*/.js\""
   },
@@ -23,6 +19,10 @@
     "path": "^0.12.7"
   },
   "devDependencies": {
+    "@babel/cli": "^7.1.5",
+    "@babel/core": "^7.1.6",
+    "@babel/node": "^7.0.0",
+    "@babel/preset-env": "^7.1.6",
     "chai": "^4.2.0",
     "mocha": "^5.2.0",
     "nyc": "^13.1.0",

@@ -1,8 +1,8 @@
-const organization = require("./organization");
-const student = require("./student");
-const tutor = require("./tutor");
+import organization from "./organization";
+import student from "./student";
+import tutor from "./tutor";
 
-module.exports = {
+export default {
   organization,
   student,
   tutor

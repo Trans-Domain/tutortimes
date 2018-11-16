@@ -1,7 +1,7 @@
 const router = require("express").Router();
-const user = require("../controllers/users");
+import user from "../controllers/users";
 
-module.exports = router
+export default router
   // For Admin
   .post("/create-organization", user.organization.create)
   .get("/find-organization/:name", user.organization.find)
@@ -14,6 +14,7 @@ module.exports = router
   .get("/find-one-tutor/:email", user.tutor.findOne)
 
   // For Tutors
+  .put("/update-tutor-info", user.tutor.update)
   .get("/find-all-students/:organization", user.student.findAll)
   .get("/find-one-student/:email", user.student.findOne)
   .post("/create-student", user.student.create);

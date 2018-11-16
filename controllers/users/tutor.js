@@ -1,7 +1,7 @@
-const Organization = require("../../models/Organizations");
+import Organization from "../../models/Organizations";
 
-module.exports = {
-  create: function(req, res) {
+export default {
+  create: (req, res) => {
     let name = req.body.name;
     let tutorData = req.body.tutorData;
     Organization.findOneAndUpdate(
@@ -11,17 +11,17 @@ module.exports = {
       .then(result => {
         res.json(result);
       })
-      .catch(function(err) {
+      .catch(err => {
         throw err;
       });
   },
-  findAll: function(req, res) {
+  findAll: (req, res) => {
     let name = req.params.organization;
     Organization.findOne({ name: name })
       .then(result => res.json(result.tutors))
       .catch(err => res.json(err));
   },
-  findOne: function(req, res) {
+  findOne: (req, res) => {
     Organization.find({ "tutors.email": req.params.email })
       .then(result => {
         let tutor;
@@ -33,6 +33,21 @@ module.exports = {
           }
         }
       })
+      .catch(err => res.json(err));
+  },
+  update: (req, res) => {
+    let id = req.body.id;
+    let updates = req.body.update; // get the body of changes, update only those in the tutor section and create an object that is returned in the format we want.
+    Organization.update(
+      { "tutors._id": id },
+      {
+        $set: {
+          // need to figure out how to make this more flexible
+          "tutors.$.bio": "Teaching is fun.... sometimes"
+        }
+      }
+    )
+      .then(result => res.json(result))
       .catch(err => res.json(err));
   }
 };

@@ -1,7 +1,7 @@
-const Organization = require("../../models/Organizations");
+import Organization from "../../models/Organizations";
 
-module.exports = {
-  create: function(req, res) {
+export default {
+  create: (req, res) => {
     let name = req.body.name;
     let studentData = req.body.studentData;
     Organization.findOneAndUpdate(
@@ -11,17 +11,17 @@ module.exports = {
       .then(result => {
         res.json(result);
       })
-      .catch(function(err) {
+      .catch(err => {
         throw err;
       });
   },
-  findAll: function(req, res) {
+  findAll: (req, res) => {
     let name = req.params.organization;
     Organization.findOne({ name: name })
       .then(result => res.json(result.students))
       .catch(err => res.json(err));
   },
-  findOne: function(req, res) {
+  findOne: (req, res) => {
     Organization.find({ "students.email": req.params.email })
       .then(result => {
         // this can be a helper?

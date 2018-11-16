@@ -1,11 +1,11 @@
-const express = require("express");
+import express from "express";
 const app = express();
-const bodyParser = require("body-parser");
-const routes = require("./routes");
-const path = require("path");
+import bodyParser from "body-parser";
+import routes from "./routes";
+import path from "path";
 const PORT = process.env.PORT || 3001;
-const mongoose = require("mongoose");
-const AWS = require("aws-sdk");
+import mongoose from "mongoose";
+import AWS from "aws-sdk";
 
 AWS.config.region = process.env.REGION;
 
@@ -27,6 +27,4 @@ mongoose.connect(
 app.use("/", routes);
 
 // listen on PORT
-app.listen(PORT, function() {
-  console.log(`🌎 ==> Server now on port ${PORT}!`);
-});
+app.listen(PORT, () => console.log(`🌎 ==> Server now on port ${PORT}!`));
