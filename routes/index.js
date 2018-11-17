@@ -13,6 +13,7 @@ export default router
   .get("/find-all-tutors/:organization", user.tutor.findAll)
   .get("/find-one-tutor/:email", user.tutor.findOne)
   .put("/update-tutor-info", user.tutor.update)
+  .delete("/delete-tutor", user.tutor.delete)
 
   // For Tutors
   .post("/create-student", user.student.create)

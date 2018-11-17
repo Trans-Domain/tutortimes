@@ -43,5 +43,16 @@ export default {
     Organization.update({ "tutors._id": id }, { $set: updates })
       .then(result => res.json(result))
       .catch(err => res.json(err));
+  },
+  delete: (req, res) => {
+    let organizationName = req.body.name;
+    let id = req.body.id;
+
+    Organization.update(
+      { name: organizationName },
+      { $pull: { tutors: { _id: id } } }
+    )
+      .then(result => res.json(result))
+      .catch(err => res.json(err));
   }
 };
