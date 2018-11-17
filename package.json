@@ -6,7 +6,7 @@
   "author": "<ashishuiux@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "server": "nodemon --exec babel-node server.js",
+    "start": "nodemon --exec babel-node server.js",
     "test": "nyc jest",
     "watch-test": "jest --watch",
     "format": "prettier --write \"**/*/.js\""
