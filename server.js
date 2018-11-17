@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 mongoose.Promise = global.Promise;
 // connect to Mongo DB
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/tutortimes",
+  process.env.MONGODB_URI,
   {
     useNewUrlParser: true
   }
