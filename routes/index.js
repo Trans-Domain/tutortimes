@@ -14,8 +14,7 @@ export default router
   .get("/find-one-tutor/:email", user.tutor.findOne)
   .put("/update-tutor-info", user.tutor.update)
   .delete("/delete-tutor", user.tutor.delete)
-
-  // For Tutors
+  .delete("/delete-student", user.student.delete)
   .post("/create-student", user.student.create)
   .get("/find-all-students/:organization", user.student.findAll)
   .get("/find-one-student/:email", user.student.findOne)
