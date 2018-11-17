@@ -1,13 +1,21 @@
 const router = require("express").Router();
-const user = require("../controllers/users");
+import user from "../controllers/users";
 
-module.exports = router
-  // Organization
+export default router
+  // For Admin
   .post("/create-organization", user.organization.create)
   .get("/find-organization/:name", user.organization.find)
   .get("/find-all-organizations", user.organization.findAll)
   .put("/update-organization", user.organization.update)
   .delete("/delete-organization", user.organization.delete)
-  // Tutor
+  // For Organization
   .post("/create-tutor", user.tutor.create)
-  .post("/create-student", user.student.create);
+  .get("/find-all-tutors/:organization", user.tutor.findAll)
+  .get("/find-one-tutor/:email", user.tutor.findOne)
+  .put("/update-tutor-info", user.tutor.update)
+  .delete("/delete-tutor", user.tutor.delete)
+  .delete("/delete-student", user.student.delete)
+  .post("/create-student", user.student.create)
+  .get("/find-all-students/:organization", user.student.findAll)
+  .get("/find-one-student/:email", user.student.findOne)
+  .put("/update-student-info", user.student.update);

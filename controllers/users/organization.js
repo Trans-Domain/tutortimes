@@ -1,7 +1,7 @@
-const Organization = require("../../models/Organizations");
+import Organization from "../../models/Organizations";
 
-module.exports = {
-  create: function(req, res) {
+export default {
+  create: (req, res) => {
     Organization.findOne({ name: req.body.name })
       .then(result => {
         result === null
@@ -18,7 +18,7 @@ module.exports = {
         throw err;
       });
   },
-  find: function(req, res) {
+  find: (req, res) => {
     Organization.findOne({ name: req.params.name })
       .then(result => {
         res.json(result);
@@ -27,19 +27,19 @@ module.exports = {
         throw err;
       });
   },
-  update: function(req, res) {
+  update: (req, res) => {
     let name = req.body.name;
     let changes = req.body.changes;
     Organization.updateOne({ name }, changes)
       .then(result => res.json(result))
       .catch(err => res.json(err));
   },
-  findAll: function(req, res) {
+  findAll: (req, res) => {
     Organization.find({})
       .then(result => res.json(result))
       .catch(err => res.json(err));
   },
-  delete: function(req, res) {
+  delete: (req, res) => {
     let name = req.body.name;
     Organization.deleteOne({ name })
       .then(result => res.json(result))
