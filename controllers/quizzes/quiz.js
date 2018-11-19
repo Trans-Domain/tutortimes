@@ -1,4 +1,5 @@
 import Organization from "../../models/Organizations";
+import getInfoUpdates from "../../helpers/getInfoUpdates/getInfoUpdates";
 
 export default {
   create: (req, res) => {
@@ -9,7 +10,14 @@ export default {
       .then(result => res.json(result))
       .catch(err => res.json(err));
   },
-  edit: (req, res) => {},
+  update: (req, res) => {
+    let id = req.body.id;
+    let updates = getInfoUpdates(req.body.updates, req.body.type);
+
+    Organization.update({ "quizzes._id": id }, { $set: updates })
+      .then(result => res.json(result))
+      .catch(err => res.json(err));
+  },
   delete: (req, res) => {},
   viewAll: (req, res) => {},
   viewTutors: (req, res) => {},
