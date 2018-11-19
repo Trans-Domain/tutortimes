@@ -2,7 +2,6 @@ import Organization from "../../models/Organizations";
 
 export default {
   create: (req, res) => {
-    console.log("entered route");
     let name = req.body.name;
     let quizData = req.body.quiz;
 
