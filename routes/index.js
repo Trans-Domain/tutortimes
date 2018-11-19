@@ -1,5 +1,6 @@
 const router = require("express").Router();
 import user from "../controllers/users";
+import test from "../controllers/quizzes";
 
 export default router
   // For Admin
@@ -18,4 +19,6 @@ export default router
   .post("/create-student", user.student.create)
   .get("/find-all-students/:organization", user.student.findAll)
   .get("/find-one-student/:email", user.student.findOne)
-  .put("/update-student-info", user.student.update);
+  .put("/update-student-info", user.student.update)
+  // For Quizzes
+  .post("/create-quiz", test.quiz.create);
