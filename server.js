@@ -30,7 +30,7 @@ mongoose
   .catch(err => console.log(err));
 
 // add routes
-app.use("/", routes);
+app.use("/api/", routes);
 
 // listen on PORT
 app.listen(PORT, () => console.log(`🌎 ==> Server now on port ${PORT}!`));
