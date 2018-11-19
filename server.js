@@ -17,14 +17,17 @@ app.use(bodyParser.json());
 // Mongoose settings
 mongoose.Promise = global.Promise;
 // connect to Mongo DB
-mongoose.connect(
-  process.env.NODE_ENV === "PROD"
-    ? process.env.MONGODB_URI
-    : "mongodb://localhost/tutortimes",
-  {
-    useNewUrlParser: true
-  }
-);
+mongoose
+  .connect(
+    process.env.NODE_ENV === "PROD"
+      ? process.env.MONGODB_URI
+      : "mongodb://localhost/tutortimes",
+    {
+      useNewUrlParser: true
+    }
+  )
+  .then(() => console.log(`db connected!`))
+  .catch(err => console.log(err));
 
 // add routes
 app.use("/", routes);
