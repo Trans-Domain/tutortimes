@@ -22,4 +22,5 @@ export default router
   .put("/update-student-info", user.student.update)
   // For Quizzes
   .post("/create-quiz", test.quiz.create)
-  .put("/update-quiz", test.quiz.update);
+  .put("/update-quiz", test.quiz.update)
+  .get("/find-all-quizzes/:organization", test.quiz.findAll);

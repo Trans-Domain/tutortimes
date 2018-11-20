@@ -19,7 +19,12 @@ export default {
       .catch(err => res.json(err));
   },
   delete: (req, res) => {},
-  viewAll: (req, res) => {},
+  findAll: (req, res) => {
+    let name = req.params.organization;
+    Organization.findOne({ name: name })
+      .then(result => res.json(result.quizzes))
+      .catch(err => res.json(err));
+  },
   viewTutors: (req, res) => {},
-  viewOne: (req, res) => {}
+  findOne: (req, res) => {}
 };
