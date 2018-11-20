@@ -14,6 +14,9 @@ var corsOptions = {
   origin: function(origin, callback) {
     console.log(`Log Out ${origin}`);
     console.log(`Index of Origin in WhiteList ${whitelist.indexOf(origin)}`);
+    console.log(whitelist[0]);
+    console.log(origin);
+    // console.log(whitelist);
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
