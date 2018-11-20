@@ -23,4 +23,5 @@ export default router
   // For Quizzes
   .post("/create-quiz", test.quiz.create)
   .put("/update-quiz", test.quiz.update)
-  .get("/find-all-quizzes/:organization", test.quiz.findAll);
+  .get("/find-all-quizzes/:organization", test.quiz.findAll)
+  .get("/find-tutors-quizzes/:organization/:email", test.quiz.viewTutors);

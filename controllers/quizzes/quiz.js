@@ -25,6 +25,20 @@ export default {
       .then(result => res.json(result.quizzes))
       .catch(err => res.json(err));
   },
-  viewTutors: (req, res) => {},
+  viewTutors: (req, res) => {
+    Organization.findOne({ name: req.params.organization })
+      .then(result => {
+        let quizList = [];
+        for (let i = 0; i < result.quizzes.length; i++) {
+          if (result.quizzes[i].editedBy === req.params.email) {
+            quizList.push(result.quizzes[i]);
+          }
+        }
+        res.json(quizList);
+      })
+      .catch(err => {
+        throw err;
+      });
+  },
   findOne: (req, res) => {}
 };
