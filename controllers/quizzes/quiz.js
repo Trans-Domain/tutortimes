@@ -40,5 +40,19 @@ export default {
         throw err;
       });
   },
-  findOne: (req, res) => {}
+  findOne: (req, res) => {
+    Organization.findOne({
+      name: req.params.organization
+    })
+      .then(result => {
+        // res.json(result);
+        for (let i = 0; i < result.quizzes.length; i++) {
+          if (result.quizzes[i]._id == req.params.quizId) {
+            res.json(result.quizzes[i]);
+            break;
+          }
+        }
+      })
+      .catch(err => res.json(err));
+  }
 };
