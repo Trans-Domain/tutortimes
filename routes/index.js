@@ -21,4 +21,5 @@ export default router
   .get("/find-one-student/:email", user.student.findOne)
   .put("/update-student-info", user.student.update)
   // For Quizzes
-  .post("/create-quiz", test.quiz.create);
+  .post("/create-quiz", test.quiz.create)
+  .put("/update-quiz", test.quiz.update);
