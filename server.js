@@ -2,11 +2,25 @@ import express from "express";
 const app = express();
 import bodyParser from "body-parser";
 import routes from "./routes";
-import path from "path";
+import cors from "cors";
 const PORT = process.env.PORT || 3001;
 require("dotenv").config();
 import mongoose from "mongoose";
 import AWS from "aws-sdk";
+
+// CORS access
+let whitelist = ["http://tutortimes-front.us-east-1.elasticbeanstalk.com/"];
+var corsOptions = {
+  origin: function(origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  }
+};
+
+app.use(cors(corsOptions));
 
 AWS.config.region = process.env.REGION;
 
