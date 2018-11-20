@@ -12,6 +12,7 @@ import AWS from "aws-sdk";
 let whitelist = ["http://tutortimes-front.us-east-1.elasticbeanstalk.com/"];
 var corsOptions = {
   origin: function(origin, callback) {
+    console.log(`Log Out ${origin}`);
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
