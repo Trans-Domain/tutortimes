@@ -2,12 +2,12 @@ import express from "express";
 const app = express();
 import bodyParser from "body-parser";
 import routes from "./routes";
-import path from "path";
 const PORT = process.env.PORT || 3001;
 require("dotenv").config();
 import mongoose from "mongoose";
 import AWS from "aws-sdk";
-
+import helmet from "helmet";
+app.use(helmet());
 AWS.config.region = process.env.REGION;
 
 // Configure body parser for AJAX requests
