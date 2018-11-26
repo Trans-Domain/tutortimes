@@ -18,7 +18,17 @@ export default {
       .then(result => res.json(result))
       .catch(err => res.json(err));
   },
-  delete: (req, res) => {},
+  delete: (req, res) => {
+    let organizationName = req.params.organization;
+    let id = req.params.quizId;
+
+    Organization.update(
+      { name: organizationName },
+      { $pull: { quizzes: { _id: id } } }
+    )
+      .then(result => res.json(result))
+      .catch(err => res.json(err));
+  },
   findAll: (req, res) => {
     let name = req.params.organization;
     Organization.findOne({ name: name })
@@ -30,7 +40,7 @@ export default {
       .then(result => {
         let quizList = [];
         for (let i = 0; i < result.quizzes.length; i++) {
-          if (result.quizzes[i].editedBy === req.params.email) {
+          if (result.quizzes[i].createdBy === req.params.email) {
             quizList.push(result.quizzes[i]);
           }
         }
@@ -45,7 +55,6 @@ export default {
       name: req.params.organization
     })
       .then(result => {
-        // res.json(result);
         for (let i = 0; i < result.quizzes.length; i++) {
           if (result.quizzes[i]._id == req.params.quizId) {
             res.json(result.quizzes[i]);

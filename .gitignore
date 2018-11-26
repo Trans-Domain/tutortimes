@@ -6,6 +6,9 @@
 # seeds 
 /seeds
 
+#coverage
+/coverage
+
 # env
 .env
 

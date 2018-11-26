@@ -55,6 +55,7 @@ const OrganizationSchema = new Schema({
       score: Number,
       difficulty: Number,
       cover: { data: Buffer, contentType: String },
+      createdBy: String,
       editedBy: String,
       questions: [
         {
