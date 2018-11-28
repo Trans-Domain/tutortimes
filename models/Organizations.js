@@ -61,19 +61,19 @@ const OrganizationSchema = new Schema({
         {
           question: String,
           option1: {
-            type: String,
+            content: String,
             isCorrect: Boolean
           },
           option2: {
-            type: String,
+            content: String,
             isCorrect: Boolean
           },
           option3: {
-            type: String,
+            content: String,
             isCorrect: Boolean
           },
           option4: {
-            type: String,
+            content: String,
             isCorrect: Boolean
           },
           image: { data: Buffer, contentType: String },
