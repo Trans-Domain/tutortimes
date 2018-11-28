@@ -25,6 +25,13 @@ export default {
       .catch(err => console.log(err));
   },
   edit: (req, res) => {},
-  delete: (req, res) => {},
+  delete: (req, res) => {
+    Organization.update(
+      { _id: req.body.orgId, "quizzes._id": req.body.quizId },
+      { $pull: { "quizzes.$.questions": { _id: req.body.questionId } } }
+    )
+      .then(result => res.json(result))
+      .catch(err => res.json(err));
+  },
   view: (req, res) => {}
 };

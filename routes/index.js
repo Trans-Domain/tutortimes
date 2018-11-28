@@ -27,4 +27,5 @@ export default router
   .get("/find-tutors-quizzes/:organization/:email", test.quiz.viewTutors)
   .get("/find-one-quiz/:organization/:quizId", test.quiz.findOne)
   .delete("/delete-quiz/:organization/:quizId", test.quiz.delete)
-  .post("/add-question", test.question.add);
+  .post("/add-question", test.question.add)
+  .delete("/delete-question", test.question.delete);
