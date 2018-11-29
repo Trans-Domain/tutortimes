@@ -28,4 +28,6 @@ export default router
   .get("/find-one-quiz/:organization/:quizId", test.quiz.findOne)
   .delete("/delete-quiz/:organization/:quizId", test.quiz.delete)
   .post("/add-question", test.question.add)
-  .delete("/delete-question", test.question.delete);
+  .delete("/delete-question", test.question.delete)
+  .get("/find-question", test.question.view)
+  .put("/edit-question", test.question.edit);
