@@ -1,16 +1,20 @@
-import Organization from "../../models/Organizations";
-import getInfoUpdates from "../../helpers/getInfoUpdates/getInfoUpdates";
+import Students from "../../models/Students";
 
 export default {
   create: (req, res) => {
-    let name = req.body.name;
     let studentData = req.body.studentData;
-    Organization.findOneAndUpdate(
-      { name: name },
-      { $push: { students: studentData } }
-    )
+    Students.findOne({ fullname: studentData.fullname })
       .then(result => {
-        res.json(result);
+        console.log(result);
+        result === null
+          ? Students.insertMany(studentData)
+              .then(result => {
+                res.json(result);
+              })
+              .catch(function(err) {
+                throw err;
+              })
+          : res.json({ error: "Student already exists" });
       })
       .catch(err => {
         throw err;
