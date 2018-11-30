@@ -26,6 +26,7 @@ export default {
       .catch(err => res.json(err));
   },
   findOne: (req, res) => {
+    // use email instead of id?
     Tutors.find({ _id: req.params.id })
       .then(result => res.json(result))
       .catch(err => res.json(err.name));

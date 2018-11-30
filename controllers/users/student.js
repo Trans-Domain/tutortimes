@@ -26,19 +26,9 @@ export default {
       .catch(err => res.json(err));
   },
   findOne: (req, res) => {
-    Organization.find({ "students.email": req.params.email })
-      .then(result => {
-        // this can be a helper?
-        let student;
-        for (let i = 0; i < result[0].students.length; i++) {
-          if (result[0].students[i].email === req.params.email) {
-            student = result[0].students[i];
-            res.json(student);
-            break;
-          }
-        }
-      })
-      .catch(err => res.json(err));
+    Students.find({ _id: req.params.id })
+      .then(result => res.json(result))
+      .catch(err => res.json(err.name));
   },
   update: (req, res) => {
     let id = req.body.id;

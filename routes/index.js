@@ -18,7 +18,7 @@ export default router
   // For Organization (Students)
   .post("/create-student", user.student.create)
   .get("/find-all-students", user.student.findAll)
-  .get("/find-one-student/:email", user.student.findOne)
+  .get("/find-one-student/:id", user.student.findOne)
   .put("/update-student-info", user.student.update)
   .delete("/delete-student", user.student.delete)
   // For Quizzes
