@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const Schema = mongoose.Schema();
+const Schema = mongoose.Schema;
 
 const QuizzesSchema = new Schema({
   id: String,
@@ -7,8 +7,9 @@ const QuizzesSchema = new Schema({
   score: Number,
   difficulty: Number,
   cover: { data: Buffer, contentType: String },
-  createdBy: String,
-  editedBy: String,
+  createdBy: { type: Schema.ObjectId, ref: "Tutors" },
+  editedBy: { type: Schema.ObjectId, ref: "Tutors" },
+  belongsTo: { type: Schema.ObjectId, ref: "Organizations" },
   questions: [
     {
       question: String,

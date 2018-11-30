@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const Schema = mongoose.Schema();
+const Schema = mongoose.Schema;
 
 const StudentSchema = new Schema({
   fullname: String,
@@ -19,13 +19,8 @@ const StudentSchema = new Schema({
       tutor: String
     }
   ],
-  parent: [
-    {
-      fullname: String,
-      email: String,
-      password: String
-    }
-  ]
+  parent: [{ type: Schema.ObjectId, ref: "Parents" }],
+  tutors: [{ type: Schema.ObjectId, ref: "Tutors" }]
 });
 
 const Students = mongoose.model("Students", StudentSchema);

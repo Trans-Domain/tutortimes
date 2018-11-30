@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const Schema = mongoose.Schema();
+const Schema = mongoose.Schema;
 
 const TutorSchema = new Schema({
   id: String,
@@ -9,7 +9,9 @@ const TutorSchema = new Schema({
   photo: Buffer,
   online: Boolean,
   bio: String,
-  phone: String
+  phone: String,
+  students: [{ type: Schema.ObjectId, ref: "Students" }],
+  belongsTo: { type: Schema.ObjectId, ref: "Organizations" }
 });
 
 const Tutors = mongoose.model("Tutors", TutorSchema);

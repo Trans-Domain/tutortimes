@@ -1,58 +1,53 @@
-import Organization from "../../models/Organizations";
-import getInfoUpdates from "../../helpers/getInfoUpdates/getInfoUpdates";
+import Tutors from "../../models/Tutors";
 
 export default {
   create: (req, res) => {
-    let name = req.body.name;
     let tutorData = req.body.tutorData;
-    Organization.findOneAndUpdate(
-      { name: name },
-      { $push: { tutors: tutorData } }
-    )
+    Tutors.findOne({ fullname: tutorData.fullname })
       .then(result => {
-        res.json(result);
+        console.log(result);
+        result === null
+          ? Tutors.insertMany(tutorData)
+              .then(result => {
+                res.json(result);
+              })
+              .catch(function(err) {
+                throw err;
+              })
+          : res.json({ error: "Tutor already exists" });
       })
       .catch(err => {
         throw err;
       });
   },
   findAll: (req, res) => {
-    let name = req.params.organization;
-    Organization.findOne({ name: name })
-      .then(result => res.json(result.tutors))
+    Tutors.find({ belongsTo: req.body.orgId })
+      .then(result => res.json(result))
       .catch(err => res.json(err));
   },
   findOne: (req, res) => {
-    Organization.find({ "tutors.email": req.params.email })
-      .then(result => {
-        let tutor;
-        for (let i = 0; i < result[0].tutors.length; i++) {
-          if (result[0].tutors[i].email === req.params.email) {
-            tutor = result[0].tutors[i];
-            res.json(tutor);
-            break;
-          }
-        }
+    Tutors.find({ _id: req.params.id })
+      .then(result => res.json(result))
+      .catch(err => res.json(err.name));
+  },
+  update: (req, res) => {
+    Tutors.find({ _id: req.body.id })
+      .then(() => {
+        Tutors.update({ _id: req.body.id }, { $set: req.body.updates })
+          .then(result => res.json(result))
+          .catch(err => res.json(err));
       })
       .catch(err => res.json(err));
   },
-  update: (req, res) => {
-    let id = req.body.id;
-    let updates = getInfoUpdates(req.body.updates, req.body.type);
-
-    Organization.update({ "tutors._id": id }, { $set: updates })
-      .then(result => res.json(result))
-      .catch(err => res.json(err));
-  },
   delete: (req, res) => {
-    let organizationName = req.body.name;
-    let id = req.body.id;
-
-    Organization.update(
-      { name: organizationName },
-      { $pull: { tutors: { _id: id } } }
-    )
-      .then(result => res.json(result))
+    Tutors.findOne({ _id: req.body.id })
+      .then(result => {
+        result != null
+          ? Tutors.deleteOne({ _id: req.body.id })
+              .then(result => res.json(result))
+              .catch(err => res.json(err))
+          : res.json({ error: "Tutor doesnt exist" });
+      })
       .catch(err => res.json(err));
   }
 };
