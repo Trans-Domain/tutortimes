@@ -21,9 +21,8 @@ export default {
       });
   },
   findAll: (req, res) => {
-    let name = req.params.organization;
-    Organization.findOne({ name: name })
-      .then(result => res.json(result.students))
+    Students.find({ belongsTo: req.body.orgId })
+      .then(result => res.json(result))
       .catch(err => res.json(err));
   },
   findOne: (req, res) => {

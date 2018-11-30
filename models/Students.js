@@ -21,7 +21,7 @@ const StudentSchema = new Schema({
   ],
   parent: [{ type: Schema.ObjectId, ref: "Parents" }],
   tutors: [{ type: Schema.ObjectId, ref: "Tutors" }],
-  organization: { type: Schema.ObjectId, ref: "Organizations" }
+  belongsTo: { type: Schema.ObjectId, ref: "Organizations" }
 });
 
 const Students = mongoose.model("Students", StudentSchema);
