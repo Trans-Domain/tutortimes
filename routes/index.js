@@ -1,34 +1,15 @@
 const router = require("express").Router();
-import user from "../controllers/users";
-import test from "../controllers/quizzes";
 
-export default router
-  // For Admin
-  .post("/create-organization", user.organization.create)
-  .get("/find-organization/:name", user.organization.find)
-  .get("/find-all-organizations", user.organization.findAll)
-  .put("/update-organization", user.organization.update)
-  .delete("/delete-organization", user.organization.delete)
-  // For Organization (Tutors)
-  .post("/create-tutor", user.tutor.create)
-  .get("/find-all-tutors", user.tutor.findAll)
-  .get("/find-one-tutor/:id", user.tutor.findOne)
-  .put("/update-tutor-info", user.tutor.update)
-  .delete("/delete-tutor", user.tutor.delete)
-  // For Organization (Students)
-  .post("/create-student", user.student.create)
-  .get("/find-all-students", user.student.findAll)
-  .get("/find-one-student/:id", user.student.findOne)
-  .put("/update-student-info", user.student.update)
-  .delete("/delete-student", user.student.delete)
-  // For Quizzes
-  .post("/create-quiz", test.quiz.create)
-  .put("/update-quiz", test.quiz.update)
-  .get("/find-all-quizzes", test.quiz.findAll)
-  .get("/find-tutors-quizzes", test.quiz.viewTutors)
-  .get("/find-one-quiz", test.quiz.findOne)
-  .delete("/delete-quiz", test.quiz.delete)
-  .post("/add-question", test.question.add)
-  .delete("/delete-question", test.question.delete)
-  .get("/find-question", test.question.view)
-  .put("/edit-question", test.question.edit);
+import organizationRoutes from "./organization";
+import questionRoutes from "./question";
+import quizRoutes from "./quiz";
+import studentRoutes from "./students";
+import tutorRoutes from "./tutor";
+
+organizationRoutes(router);
+questionRoutes(router);
+quizRoutes(router);
+studentRoutes(router);
+tutorRoutes(router);
+
+export default router;

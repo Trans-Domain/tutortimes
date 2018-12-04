@@ -21,7 +21,7 @@ const QuestionSchema = new Schema({
   },
   image: { data: Buffer, contentType: String },
   score: { type: Number },
-  QuizId: { type: Schema.ObjectId, ref: "Quizzes" },
+  quizId: { type: Schema.ObjectId, ref: "Quizzes" },
   belongsTo: { type: Schema.ObjectId, ref: "Organizations" }
 });
 

@@ -1,30 +1,31 @@
-import Organization from "../../models/Organizations";
+import Question from "../../models/Questions";
 
 export default {
   add: (req, res) => {
-    let newQuestion = {
-      question: req.body.question.title,
-      option1: req.body.question.opt1,
-      option2: req.body.question.opt2,
-      option3: req.body.question.opt3,
-      option4: req.body.question.opt4,
-      image: req.body.question.image,
-      score: req.body.question.score
-    };
-    Organization.update(
-      { _id: req.body.orgId, "quizzes._id": req.body.quizId },
-      {
-        $push: {
-          "quizzes.$.questions": newQuestion
-        }
-      }
-    )
-      .then(result => res.json(result))
-      .catch(err => console.log(err));
+    let questionData = req.body.questionData;
+    Question.findOne({
+      question: questionData.question,
+      quizId: questionData.quizId,
+      belongsTo: questionData.questionData
+    })
+      .then(result => {
+        result === null
+          ? Question.create(questionData)
+              .then(result => {
+                res.json(result);
+              })
+              .catch(function(err) {
+                throw err;
+              })
+          : res.json({ error: "Question already exists" });
+      })
+      .catch(err => {
+        throw err;
+      });
   },
   edit: (req, res) => {},
   delete: (req, res) => {
-    Organization.update(
+    Question.update(
       { _id: req.body.orgId, "quizzes._id": req.body.quizId },
       { $pull: { "quizzes.$.questions": { _id: req.body.questionId } } }
     )
@@ -32,7 +33,7 @@ export default {
       .catch(err => res.json(err));
   },
   view: (req, res) => {
-    Organization.findOne(
+    Question.findOne(
       {
         _id: req.body.orgId
       },
