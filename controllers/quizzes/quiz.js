@@ -1,66 +1,64 @@
-import Organization from "../../models/Organizations";
-import getInfoUpdates from "../../helpers/getInfoUpdates/getInfoUpdates";
+import Quizzes from "../../models/Quizzes";
 
 export default {
   create: (req, res) => {
-    let name = req.body.name;
-    let quizData = req.body.quiz;
-
-    Organization.findOneAndUpdate({ name }, { $push: { quizzes: quizData } })
-      .then(result => res.json(result))
-      .catch(err => res.json(err));
-  },
-  update: (req, res) => {
-    let id = req.body.id;
-    let updates = getInfoUpdates(req.body.updates, req.body.type);
-
-    Organization.update({ "quizzes._id": id }, { $set: updates })
-      .then(result => res.json(result))
-      .catch(err => res.json(err));
-  },
-  delete: (req, res) => {
-    let organizationName = req.params.organization;
-    let id = req.params.quizId;
-
-    Organization.update(
-      { name: organizationName },
-      { $pull: { quizzes: { _id: id } } }
-    )
-      .then(result => res.json(result))
-      .catch(err => res.json(err));
-  },
-  findAll: (req, res) => {
-    let name = req.params.organization;
-    Organization.findOne({ name: name })
-      .then(result => res.json(result.quizzes))
-      .catch(err => res.json(err));
-  },
-  viewTutors: (req, res) => {
-    Organization.findOne({ name: req.params.organization })
+    let quizData = req.body.quizData;
+    Quizzes.findOne({ title: req.body.title })
       .then(result => {
-        let quizList = [];
-        for (let i = 0; i < result.quizzes.length; i++) {
-          if (result.quizzes[i].createdBy === req.params.email) {
-            quizList.push(result.quizzes[i]);
-          }
-        }
-        res.json(quizList);
+        result === null
+          ? Quizzes.insertMany(quizData)
+              .then(result => {
+                res.json(result);
+              })
+              .catch(function(err) {
+                throw err;
+              })
+          : res.json({ error: "Quiz already exists" });
       })
       .catch(err => {
         throw err;
       });
   },
-  findOne: (req, res) => {
-    Organization.findOne({
-      name: req.params.organization
-    })
+  update: (req, res) => {
+    Quizzes.find({ _id: req.body.id })
+      .then(() => {
+        Quizzes.update({ _id: req.body.id }, { $set: req.body.updates })
+          .then(result => res.json(result))
+          .catch(err => res.json(err));
+      })
+      .catch(err => res.json(err));
+  },
+  delete: (req, res) => {
+    Quizzes.findOne({ _id: req.body.id })
       .then(result => {
-        for (let i = 0; i < result.quizzes.length; i++) {
-          if (result.quizzes[i]._id == req.params.quizId) {
-            res.json(result.quizzes[i]);
-            break;
-          }
-        }
+        result != null
+          ? Quizzes.deleteOne({ _id: req.body.id })
+              .then(result => res.json(result))
+              .catch(err => res.json(err))
+          : res.json({ error: "Quiz doesnt exist" });
+      })
+      .catch(err => res.json(err));
+  },
+  findAll: (req, res) => {
+    // by organization
+    Quizzes.find({ belongsTo: req.body.orgId })
+      .then(result => {
+        result.length > 0 ? res.json(result) : res.json("No quizzes exist");
+      })
+      .catch(err => res.json(err));
+  },
+  viewTutors: (req, res) => {
+    // by tutor
+    Quizzes.find({ createdBy: req.body.tutorId })
+      .then(result => {
+        result.length > 0 ? res.json(result) : res.json("No quizzes exist");
+      })
+      .catch(err => res.json(err));
+  },
+  findOne: (req, res) => {
+    Quizzes.find({ _id: req.body.id })
+      .then(result => {
+        res.json(result);
       })
       .catch(err => res.json(err));
   }

@@ -11,7 +11,8 @@ const TutorSchema = new Schema({
   bio: String,
   phone: String,
   students: [{ type: Schema.ObjectId, ref: "Students" }],
-  belongsTo: { type: Schema.ObjectId, ref: "Organizations" }
+  belongsTo: { type: Schema.ObjectId, ref: "Organizations" },
+  quizzes: [{ type: Schema.ObjectId, ref: "Quizzes" }]
 });
 
 const Tutors = mongoose.model("Tutors", TutorSchema);
