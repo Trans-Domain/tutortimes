@@ -31,22 +31,23 @@ export default {
       .catch(err => res.json(err.name));
   },
   update: (req, res) => {
-    let id = req.body.id;
-    let updates = getInfoUpdates(req.body.updates, req.body.type);
-
-    Organization.update({ "students._id": id }, { $set: updates })
-      .then(result => res.json(result))
+    Students.find({ _id: req.body.id })
+      .then(() => {
+        Students.update({ _id: req.body.id }, { $set: req.body.updates })
+          .then(result => res.json(result))
+          .catch(err => res.json(err));
+      })
       .catch(err => res.json(err));
   },
   delete: (req, res) => {
-    let organizationName = req.body.name;
-    let id = req.body.id;
-
-    Organization.update(
-      { name: organizationName },
-      { $pull: { students: { _id: id } } }
-    )
-      .then(result => res.json(result))
+    Students.findOne({ _id: req.body.id })
+      .then(result => {
+        result != null
+          ? Students.deleteOne({ _id: req.body.id })
+              .then(result => res.json(result))
+              .catch(err => res.json(err))
+          : res.json({ error: "Student doesnt exist" });
+      })
       .catch(err => res.json(err));
   }
 };
