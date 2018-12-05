@@ -23,7 +23,17 @@ export default {
         throw err;
       });
   },
-  edit: (req, res) => {},
+  edit: (req, res) => {
+    Question.find({ _id: req.body.id })
+      .then(result => {
+        result.length === 0
+          ? res.json("Question doesn't exist")
+          : Question.update({ _id: req.body.id }, { $set: req.body.updates })
+              .then(result => res.json(result))
+              .catch(err => res.json(err));
+      })
+      .catch(err => res.json(err));
+  },
   delete: (req, res) => {
     Question.findOne({ _id: req.body.id })
       .then(result => {
