@@ -8,78 +8,9 @@ const OrganizationSchema = new Schema({
   billingDate: { type: Date },
   logo: { type: Buffer },
   password: { type: String, required: true },
-  tutors: [
-    {
-      id: String,
-      fullname: String,
-      password: String,
-      email: String,
-      photo: Buffer,
-      online: Boolean,
-      bio: String,
-      phone: String
-    }
-  ],
-  students: [
-    {
-      fullname: String,
-      password: String,
-      email: String,
-      photo: Buffer,
-      online: Boolean,
-      bio: String,
-      goal: String,
-      phone: String,
-      grade: String,
-      score: Number,
-      reviews: [
-        {
-          date: Date,
-          body: String,
-          tutor: String
-        }
-      ],
-      parent: [
-        {
-          fullname: String,
-          email: String,
-          password: String
-        }
-      ]
-    }
-  ],
-  quizzes: [
-    {
-      id: String,
-      title: String,
-      score: Number,
-      difficulty: Number,
-      cover: { data: Buffer, contentType: String },
-      questions: [
-        {
-          question: String,
-          option1: {
-            type: String,
-            isCorrect: Boolean
-          },
-          option2: {
-            type: String,
-            isCorrect: Boolean
-          },
-          option3: {
-            type: String,
-            isCorrect: Boolean
-          },
-          option4: {
-            type: String,
-            isCorrect: Boolean
-          },
-          image: { data: Buffer, contentType: String },
-          score: { type: Number }
-        }
-      ]
-    }
-  ]
+  tutors: [{ type: Schema.ObjectId, ref: "Tutors" }],
+  students: [{ type: Schema.ObjectId, ref: "Students" }],
+  quizzes: [{ type: Schema.ObjectId, ref: "Quizzes" }]
 });
 
 const Organizations = mongoose.model("Organizations", OrganizationSchema);

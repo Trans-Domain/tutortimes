@@ -6,10 +6,11 @@
   "author": "<ashishuiux@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon --exec babel-node server.js",
-    "test": "nyc jest",
+    "server": "nodemon --exec babel-node server.js",
+    "test": "jest --coverage",
     "watch-test": "jest --watch",
-    "format": "prettier --write \"**/*/.js\""
+    "format": "prettier --write \"**/*/.js\"",
+    "flow": "flow"
   },
   "dependencies": {
     "@babel/cli": "^7.1.5",
@@ -29,6 +30,8 @@
   "devDependencies": {
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.4.2",
+    "flow": "^0.2.3",
+    "flow-bin": "^0.86.0",
     "jest": "^23.6.0",
     "nyc": "^13.1.0",
     "prettier": "^1.15.2"
