@@ -36,25 +36,11 @@ export default {
       .catch(err => res.json(err));
   },
   view: (req, res) => {
-    Question.findOne(
-      {
-        _id: req.body.orgId
-      },
-      {
-        quizzes: {
-          $elemMatch: { _id: req.body.quizId }
-        }
-      }
-    )
+    Question.find({ _id: req.body.id })
       .then(result => {
-        let questions = result.quizzes[0].questions;
-        for (let i = 0; i < questions.length; i++) {
-          if (questions[i]._id == req.body.questionId) {
-            res.json(questions[i]);
-            break;
-          }
-        }
-        res.json({ err: "question not found" });
+        result.length === 0
+          ? res.json("Question doesn't exist")
+          : res.json(result);
       })
       .catch(err => res.json(err));
   }
