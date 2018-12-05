@@ -48,3 +48,18 @@ describe("Student: Get student info updates", () => {
     });
   });
 });
+
+describe("Quizzes: get quiz info updates", () => {
+  test("return quiz modified object", () => {
+    expect(
+      getInfoUpdates(
+        {
+          difficulty: 2
+        },
+        "quizzes"
+      )
+    ).toEqual({
+      "quizzes.$.difficulty": 2
+    });
+  });
+});

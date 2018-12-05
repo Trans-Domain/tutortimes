@@ -1,8 +1,3 @@
-/*
-  - password
-  - bio
-  - phone
-*/
 const getInfoUpdates = (user, type) => {
   // get array of keys and values
   let keys = Object.keys(user).map(x => `${type}.$.${x}`);
