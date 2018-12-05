@@ -25,11 +25,14 @@ export default {
   },
   edit: (req, res) => {},
   delete: (req, res) => {
-    Question.update(
-      { _id: req.body.orgId, "quizzes._id": req.body.quizId },
-      { $pull: { "quizzes.$.questions": { _id: req.body.questionId } } }
-    )
-      .then(result => res.json(result))
+    Question.findOne({ _id: req.body.id })
+      .then(result => {
+        result != null
+          ? Question.deleteOne({ _id: req.body.id })
+              .then(result => res.json(result))
+              .catch(err => res.json(err))
+          : res.json({ error: "Question doesnt exist" });
+      })
       .catch(err => res.json(err));
   },
   view: (req, res) => {
