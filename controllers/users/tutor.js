@@ -1,19 +1,26 @@
 import Tutors from "../../models/Tutors";
+import bcrypt from "bcrypt";
+const saltRounds = 10;
 
 export default {
   create: (req, res) => {
     let tutorData = req.body.tutorData;
-    Tutors.findOne({ fullname: tutorData.fullname })
+    Tutors.findOne({ email: tutorData.email })
       .then(result => {
-        console.log(result);
         result === null
-          ? Tutors.insertMany(tutorData)
-              .then(result => {
-                res.json(result);
+          ? bcrypt
+              .hash(tutorData.password, saltRounds)
+              .then(hash => {
+                tutorData.password = hash;
+                Tutors.insertMany(tutorData)
+                  .then(result => {
+                    res.json({ message: "Successfully wrote tutor to db!" });
+                  })
+                  .catch(function(err) {
+                    throw err;
+                  });
               })
-              .catch(function(err) {
-                throw err;
-              })
+              .catch(err => console.log(err))
           : res.json({ error: "Tutor already exists" });
       })
       .catch(err => {
