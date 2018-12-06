@@ -1,6 +1,5 @@
 import Students from "../../models/Students";
-import bcrypt from "bcrypt";
-const saltRounds = 10;
+import hashPassword from "../../helpers/passwordHashing/passwordHashing";
 
 export default {
   create: (req, res) => {
@@ -8,16 +7,19 @@ export default {
     Students.findOne({ fullname: studentData.fullname })
       .then(result => {
         result === null
-          ? bcrypt.hash(studentData.password, saltRounds).then(hash => {
-              studentData.password = hash;
-              Students.insertMany(studentData)
-                .then(result => {
-                  res.json({ message: "Successfully wrote student to db!" });
-                })
-                .catch(function(err) {
-                  throw err;
-                });
-            })
+          ? hashPassword(studentData)
+              .then(hashedStudent => {
+                Students.insertMany(hashedStudent)
+                  .then(() => {
+                    res.json({
+                      message: "Successfully wrote student to db!"
+                    });
+                  })
+                  .catch(function(err) {
+                    throw err;
+                  });
+              })
+              .catch(err => res.json(err))
           : res.json({ error: "Student already exists" });
       })
       .catch(err => {

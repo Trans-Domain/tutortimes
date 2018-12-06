@@ -1,6 +1,5 @@
 import Organization from "../../models/Organizations";
-import bcrypt from "bcrypt";
-const saltRounds = 10;
+import hashPassword from "../../helpers/passwordHashing/passwordHashing";
 
 export default {
   create: (req, res) => {
@@ -9,12 +8,10 @@ export default {
       .then(result => {
         orgDetails;
         result === null
-          ? bcrypt
-              .hash(orgDetails.password, saltRounds)
-              .then(hash => {
-                orgDetails.password = hash;
-                Organization.insertMany(orgDetails)
-                  .then(result => {
+          ? hashPassword(orgDetails)
+              .then(hashedOrg => {
+                Organization.insertMany(hashedOrg)
+                  .then(() => {
                     res.json({
                       message: "successfully written organization to db!"
                     });

@@ -2,15 +2,17 @@ import bcrypt from "bcrypt";
 const saltRounds = 10;
 
 const hashPassword = newUser => {
-  bcrypt
-    .hash(newUser.password, saltRounds)
-    .then(async hash => {
-      newUser.password = await hash;
-      return newUser;
-    })
-    .catch(err => console.log(err));
-};
+  var promise = new Promise((resolve, reject) => {
+    bcrypt
+      .hash(newUser.password, saltRounds)
+      .then(async hash => {
+        newUser.password = hash;
+        resolve(newUser);
+      })
+      .catch(err => reject(err));
+  });
 
-// hashPassword({ password: "thisisapassword" });
+  return promise;
+};
 
 export default hashPassword;
