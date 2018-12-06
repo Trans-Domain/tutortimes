@@ -53,5 +53,13 @@ export default {
           : res.json(result);
       })
       .catch(err => res.json(err));
+  },
+  findAllByQuiz: (req, res) => {
+    Question.find({ quizId: req.body.quizId })
+      .then(result => {
+        // create a helper to filter through the questions and organize them the right way
+        res.json(result);
+      })
+      .catch(err => res.json(err));
   }
 };
