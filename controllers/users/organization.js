@@ -1,17 +1,29 @@
 import Organization from "../../models/Organizations";
+import bcrypt from "bcrypt";
+const saltRounds = 10;
 
 export default {
   create: (req, res) => {
-    Organization.findOne({ name: req.body.name })
+    let orgDetails = req.body;
+    Organization.findOne({ name: orgDetails.name })
       .then(result => {
+        orgDetails;
         result === null
-          ? Organization.insertMany(req.body)
-              .then(result => {
-                res.json(result);
+          ? bcrypt
+              .hash(orgDetails.password, saltRounds)
+              .then(hash => {
+                orgDetails.password = hash;
+                Organization.insertMany(orgDetails)
+                  .then(result => {
+                    res.json({
+                      message: "successfully written organization to db!"
+                    });
+                  })
+                  .catch(function(err) {
+                    throw err;
+                  });
               })
-              .catch(function(err) {
-                throw err;
-              })
+              .catch(err => res.json(err))
           : res.json({ error: "organization already exists" });
       })
       .catch(err => {
