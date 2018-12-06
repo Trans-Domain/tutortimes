@@ -1,19 +1,23 @@
 import Tutors from "../../models/Tutors";
+import hashPassword from "../../helpers/passwordHashing/passwordHashing";
 
 export default {
   create: (req, res) => {
     let tutorData = req.body.tutorData;
-    Tutors.findOne({ fullname: tutorData.fullname })
+    Tutors.findOne({ email: tutorData.email })
       .then(result => {
-        console.log(result);
         result === null
-          ? Tutors.insertMany(tutorData)
-              .then(result => {
-                res.json(result);
+          ? hashPassword(tutorData)
+              .then(hashedTutor => {
+                Tutors.insertMany(hashedTutor)
+                  .then(() => {
+                    res.json({ message: "Successfully wrote tutor to db!" });
+                  })
+                  .catch(function(err) {
+                    res.json({ err });
+                  });
               })
-              .catch(function(err) {
-                throw err;
-              })
+              .catch(err => res.json(err))
           : res.json({ error: "Tutor already exists" });
       })
       .catch(err => {

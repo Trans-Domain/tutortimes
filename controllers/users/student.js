@@ -1,19 +1,25 @@
 import Students from "../../models/Students";
+import hashPassword from "../../helpers/passwordHashing/passwordHashing";
 
 export default {
   create: (req, res) => {
     let studentData = req.body.studentData;
     Students.findOne({ fullname: studentData.fullname })
       .then(result => {
-        console.log(result);
         result === null
-          ? Students.insertMany(studentData)
-              .then(result => {
-                res.json(result);
+          ? hashPassword(studentData)
+              .then(hashedStudent => {
+                Students.insertMany(hashedStudent)
+                  .then(() => {
+                    res.json({
+                      message: "Successfully wrote student to db!"
+                    });
+                  })
+                  .catch(function(err) {
+                    throw err;
+                  });
               })
-              .catch(function(err) {
-                throw err;
-              })
+              .catch(err => res.json(err))
           : res.json({ error: "Student already exists" });
       })
       .catch(err => {
