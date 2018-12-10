@@ -55,7 +55,8 @@ export default {
       .catch(err => res.json(err));
   },
   findAllByQuiz: (req, res) => {
-    Question.find({ quizId: req.body.quizId })
+    Question.find({ quizId: req.body.quizId, belongsTo: req.body.orgId })
+      .populate("quizzes")
       .then(result => {
         // create a helper to filter through the questions and organize them the right way
         res.json(result);
