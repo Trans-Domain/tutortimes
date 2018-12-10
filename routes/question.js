@@ -5,4 +5,5 @@ export default router => {
   router.delete("/delete-question", test.question.delete);
   router.get("/find-question", test.question.view);
   router.put("/edit-question", test.question.edit);
+  router.get("/find-all-questions", test.question.findAllByQuiz);
 };
