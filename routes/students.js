@@ -6,4 +6,5 @@ export default router => {
   router.get("/find-one-student/:id", user.student.findOne);
   router.put("/update-student-info", user.student.update);
   router.delete("/delete-student", user.student.delete);
+  router.get("/student-login", user.student.login);
 };

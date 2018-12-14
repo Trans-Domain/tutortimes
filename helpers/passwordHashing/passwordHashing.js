@@ -1,13 +1,13 @@
 import bcrypt from "bcrypt";
 const saltRounds = 10;
 
-const hashPassword = newUser => {
+const hashPassword = user => {
   return new Promise((resolve, reject) => {
     bcrypt
-      .hash(newUser.password, saltRounds)
+      .hash(user.password, saltRounds)
       .then(hash => {
-        newUser.password = hash;
-        resolve(newUser);
+        user.password = hash;
+        resolve(user);
       })
       .catch(err => reject(err));
   });
