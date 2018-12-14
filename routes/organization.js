@@ -6,5 +6,5 @@ export default router => {
   router.get("/find-all-organizations", user.organization.findAll);
   router.put("/update-organization", user.organization.update);
   router.delete("/delete-organization", user.organization.delete);
-  router.get("/org-login", user.organization.login);
+  router.get("/organization-login", user.organization.login);
 };

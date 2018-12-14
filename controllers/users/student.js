@@ -1,5 +1,6 @@
 import Students from "../../models/Students";
 import hashPassword from "../../helpers/passwordHashing/passwordHashing";
+import bcrypt from "bcrypt";
 
 export default {
   create: (req, res) => {
@@ -56,5 +57,24 @@ export default {
       })
       .catch(err => res.json(err));
   },
-  login: (req, res) => {}
+  login: (req, res) => {
+    /** @description : req.body has properties: email, password */
+    let user = req.body;
+    Students.findOne({ email: user.email })
+      .then(result => {
+        bcrypt
+          .compare(user.password, result.password)
+          .then(valid => {
+            valid
+              ? res.json({ status: "correct password" })
+              : res.json({ status: "wrong password" });
+          })
+          .catch(err => {
+            res.json(err);
+          });
+      })
+      .catch(err => {
+        throw err;
+      });
+  }
 };

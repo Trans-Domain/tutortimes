@@ -56,18 +56,16 @@ export default {
       .catch(err => res.json(err));
   },
   login: (req, res) => {
-    /** @description : req.body has properties: email, password, type */
+    /** @description : req.body has properties: email, password */
     let user = req.body;
     Organization.findOne({ email: user.email })
       .then(result => {
         bcrypt
           .compare(user.password, result.password)
           .then(valid => {
-            if (valid) {
-              res.json({ status: "correct password" });
-            } else {
-              res.json({ status: "wrong password" });
-            }
+            valid
+              ? res.json({ status: "correct password" })
+              : res.json({ status: "wrong password" });
           })
           .catch(err => {
             res.json(err);
