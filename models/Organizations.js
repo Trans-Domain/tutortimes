@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const OrganizationSchema = new Schema({
   name: { type: String, required: true },
+  email: { type: String },
   address: { type: String, required: true },
   dateJoined: { type: Date, required: true },
   billingDate: { type: Date },

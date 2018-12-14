@@ -54,5 +54,6 @@ export default {
           : res.json({ error: "Tutor doesnt exist" });
       })
       .catch(err => res.json(err));
-  }
+  },
+  login: (req, res) => {}
 };
